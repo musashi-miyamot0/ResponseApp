@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+    
+{% block content %}
+    <main class='h-[100vh] grid grid-cols-3 grid-rows-3'>
+        <div class='grid grid-cols-[1fr,207px,1fr] rounded-3xl shadow-inner shadow-[#65558F]/40 col-start-2 h-[500px] row-start-2 bg-panel '>
+            <img width='700px' class='opacity-5 shadow-inner translate-x-[-60px] translate-y-[-90px]   fixed col-start-1'src="{% static 'svg/register.svg' %}" alt="">
+            <form autocomplete="off" class='z-10  row-start-1 col-start-2 'action="" method='post'>
+
+                {% csrf_token %}
+                <div class='w-full h-full 3'>
+                    {% for f in form%}
+                        <div class="mt-10">
+                            {{ f }}
+                            
+                        </div>
+                            {% if f.errors %}
+                            {% for er in f.errors %}
+                            <div class='translate-x-[26rem] translate-y-[-60px] fixed '>
+                                <div class='bg-dark_panel translate-y-3  rounded-md w-3 h-3'></div>
+                                <p class='bg-panel  rounded-md w-[300px] shadow-inner shadow-[#65558F]/40 p-1 text-center'>{{er}}</p>
+                            </div> 
+                            {% endfor %}
+                                
+                            {% endif %}
+                    {% endfor %}
+                    <div class="grid grid-cols-1 row-start-6"> 
+                        <button type="submit" class='bg-button active:bg-panel mt-10  transition-colors h-12 p-2 w-[200px]  rounded-[100px]  shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]  gap-2 text-[#65558f] font-bold'>Регистрация</button>
+                    </div>
+                    <div class="grid grid-cols-1 row-start-7">
+                        <a href="{% url 'register:login' %}" class='font-Baskervville text-center mt-3 mr-4 text-[#757575]'>Войти</a>
+                    </div>
+                </div>
+            </form>
+                
+        </div>
+    </main>
+{% endblock content %}

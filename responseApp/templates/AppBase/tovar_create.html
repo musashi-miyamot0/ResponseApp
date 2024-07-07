@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block tovarName %}
+    {{ block.super }} &gt Добавить статью
+{% endblock tovarName %}
+    
+
+{% block content %}
+    
+    <main class=" w-full h-screen ">
+        <form enctype='multipart/form-data'  action="{% url 'tovar_create' %}" class='grid  grid-rows-[100px,190px,20px,48px,666px,1fr] grid-cols-[50px,360px,30px,1421px,1fr]' method='POST'>
+            {% csrf_token %}
+            <div class='w-[360px] h-[190px] rounded-2xl bg-panel row-start-2 col-start-2 shadow-inner shadow-[#65558F]/20 grid grid-cols-[61px,204px,70px] gap-3 grid-rows-[20px,40px,48px,1fr]'>
+                <div class='col-start-2 row-start-2'>
+                    {{ form.title }}
+                </div>
+    
+                <div class='col-start-1 row-start-4 ml-7 '>
+                    {{ form.image }}
+                </div>
+    
+            </div>
+    
+            <div class='flex w-[1300px] h-[800px] rounded-2xl  bg-panel row-start-2 col-start-4 shadow-inner shadow-[#65558F]/20'>
+                <div class='translate-y-3 h-[20px]'>
+                    {{ form.description }}
+                </div>
+            </div>
+
+            <div class='center col-start-2 row-start-4 flex justify-center'>
+                <button type='submit' class='flex items-center justify-center  h-12 bg-button rounded-3xl w-[130px] active:bg-panel text-dark_panel font-bold p-2 cursor-pointer shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]'>+ Создать</button>
+            </div>
+        </form>
+            
+    </main>
+{% endblock content %}
+    

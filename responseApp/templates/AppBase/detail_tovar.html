@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block tovarName %}
+    {{ block.super }} &gt {{object.title|truncatechars:12}}
+{% endblock tovarName %}
+    
+
+
+{% block content %}
+<main class='mt-[200px] grid grid-cols-2 rounded-2xl p-3 border-solid border-[3px] border-panel w-[95%] ml-[50px]''>
+    <div class='' >
+        <div class=' p-3 border-solid border-[3px] bg-button rounded-2xl border-dark_panel/70 grid grid-cols-[200px,1fr]'>
+            <span class='row-start-1 row-span-1 col-start-1'>{{object.date_create}}</span>
+            <span class='font-bold text-[#3e3e3e] row-start-1 row-span-1 col-start-2'>{{object.title}}</span>
+            <img class='row-start-2 row-span-1 col-start-1' src="{{object.image.url}}" alt="Photo tovar">
+            <span class='w-[600px] row-start-2 row-span-1 col-start-2'>{{object.description}}</span>
+        </div>
+        
+    </div>
+
+</main>
+<footer>
+    <div class='mt-36  p-3   rounded-2xl '>
+        {{form.}}
+        {% for obj in object.responses.all %}
+            <div class='bg-button mt-2 rounded-2xl p-2'>
+                <p><b>{{obj.title}}</b></p>
+                <p>{{obj.text}}</p>
+            </div>
+        {% endfor %}
+            
+    </div>
+</footer>
+{% endblock content %}
+    

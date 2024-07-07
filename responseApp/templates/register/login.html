@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block headOther %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&display=swap" rel="stylesheet">
+{% endblock headOther %}
+
+{% block tovarName %}
+    {{ block.super }} &gt Вход
+{% endblock tovarName %}
+
+
+{% block title %}
+    Вход в аккаунт
+{% endblock title %}
+    
+
+
+{% block content %}
+    <main class='h-[100vh] grid grid-cols-3 grid-rows-3'>
+        
+        <div class='grid grid-cols-3 rounded-3xl shadow-inner shadow-[#65558F]/40 col-start-2 row-start-2 bg-panel '>
+             <img src="{% static 'svg/login.svg' %}" width="200px" class='col-start-1 mt-[60px]' alt="">
+                <form autocomplete="off" class=' active:outline-none row-start-1 col-start-2 grid grid-rows-[1fr,24px,30px,24px,40px,48px,1fr] 'action="" method='post'>
+                    {% csrf_token %}
+                    <input type="text" name="{{form.username.name}}" placeholder="Имя" class='transition-colors focus:border-dark_panel border-0 focus:border-b-4 focus:outline-none focus:ring-0 bg-panel border-b-4 border-dark_panel/50 row-start-2 col-start-1'>
+                    <input type="text" name="{{form.password.name}}" placeholder="Пароль" class='transition-colors focus:border-dark_panel border-0 focus:border-b-4 focus:outline-none focus:ring-0 bg-panel border-b-4 border-dark_panel/50 row-start-4 col-start-1'>
+                        <button type="submit" class='bg-button active:bg-panel col-start-1 row-start-6 transition-colors h-12 p-2 w-[200px]  rounded-[100px]  shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]  gap-2 text-[#65558f] font-bold'>Войти</button>
+                        <a href="{% url 'register:create_profile' %}" class='font-Baskervville row-start-7 text-center mt-3 text-[#757575]'>Нету аккаунта? Зарегистрируйтесь</a>
+                </form>
+
+        </div>
+    </main>
+{% endblock content %}
+    
+
+
+    
