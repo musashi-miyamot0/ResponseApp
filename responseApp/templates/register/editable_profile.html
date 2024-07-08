@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block tovarName %}
+    {{ block.super }} &gt Редактирование профиля
+{% endblock tovarName %}
+
+
+{% block content %}
+<main class='w-full h-screen flex justify-center items-center'>
+    <form action="" method='post' enctype='multipart/form-data'>
+        {% csrf_token %}
+
+    <div class='shadow-inner shadow-[#65558F]/70 p-3 w-[600px] bg-panel h-max rounded-xl'>
+
+        <div class='grid grid-cols-[150px,200px,1fr] grid-rows-[20px,30px,10px,30px,10px,30px,10px,30px,1fr]'>
+            
+
+            <img src="{{user.photo.url}}"  class='rounded-xl col-span-2 col-start-1 row-start-1'alt="Avatar"> 
+            <label for="{{form.photo.id_for_label }}" class='mt-2 col-start-1 row-start-8 flex justify-center content-center'>
+                <p class=' cursor-pointer hover:rounded-md  transition-all hover:bg-dark_panel/30 text-dark_panel font-bold'>Изменить фото</p>
+            {{form.photo}}
+        </label>
+           {% for f in  form%}
+            
+            {% if f == form.photo %}
+            {% else %}
+            {{f}}
+            {% endif %}
+                
+           {% endfor %}
+            <button type="submit" class='bg-button col-start-3 row-start-2 ml-4 row-span-4 active:bg-panel mt-10  transition-colors h-12 p-2 w-max  rounded-[100px]  shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]  gap-2 text-[#65558f] font-bold'>Подтвердить изменения</button>
+        </div>
+
+
+    </div>
+</form>
+</main>
+{% endblock content %}
+    
+    

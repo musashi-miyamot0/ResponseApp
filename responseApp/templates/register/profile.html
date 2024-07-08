@@ -2,15 +2,29 @@
 {% load static %}
 
 
-{% block tovarOther %}
+{% block tovarName %}
     {{ block.super }} &gt Профиль
-{% endblock tovarOther %}
+{% endblock tovarName %}
+
 
 
 {% block content %}
     <main class='w-full h-screen flex justify-center items-center'>
+        
+
+            {{message_success}}
+
+
+
+            
         <div class='shadow-inner shadow-[#65558F]/70 p-3 w-[600px] bg-panel h-max rounded-xl'>
+
             <div class='grid grid-cols-[130px,20px,1fr] grid-rows-[20px,30px,10px,30px,10px,30px,10px,30px,1fr]'>
+                <div class='flex justify-end'>
+                    <a href="{% url 'register:edit_profile' %}" title='Редактировать профиль'>
+                        <img src="{% static 'svg/edit.svg' %}" class='bg-dark_panel/30 rounded-xl p-1'width='34' alt="edit icon"> 
+                    </a>
+                </div>
                 {% if object.photo %}
                 <img src="{{object.photo.url}}" class='rounded-xl col-span-2 col-start-1 row-start-1'  alt="Фото пользователя">
                 {% else %}

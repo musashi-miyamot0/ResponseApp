@@ -41,7 +41,11 @@
                 <ul class='flex flex-col'>
                     {% for item in mainmenu %}
                    
-                    <li class=' mt-10 text-dark_panel   font-bold h-[30px] hover:scale-[1.2] transition-all cursor-pointer hover:rounded-md hover:bg-dark_panel/15 grid grid-cols-[24px,1fr] grid-rows-1'> <img src="{% static item.ico %}" class='col-start-1' alt="">{{item.title}}</li>
+                    <li class=' mt-10 text-dark_panel   font-bold h-[30px] hover:scale-[1.2] transition-all cursor-pointer hover:rounded-md hover:bg-dark_panel/15 grid grid-cols-[24px,1fr] grid-rows-1'> <img src="{% static item.ico %}" class='col-start-1' alt=""><a href="
+                    {% if item.urlLink %}
+                        {% url item.urlLink %}
+                    {% endif %}
+                        ">{{item.title}}</a></li>
                 {% endfor %}
                 </ul>
                     

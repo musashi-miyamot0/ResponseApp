@@ -2,7 +2,7 @@ from typing import Any
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.forms import UserCreationForm
 class UserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -44,3 +44,21 @@ class CreateUserForm(UserCreationForm):
         })}
 
         order = ['username','email','password1','password2']
+        
+class EditUserForm(forms.ModelForm):
+    
+    class Meta:
+        
+        base= "h-[40px] transition-colors focus:border-dark_panel border-0 focus:border-b-4 focus:outline-none focus:ring-0 bg-panel border-b-4 border-dark_panel/50   w-full",
+
+            
+        model = get_user_model()
+        fields = ['username','photo','first_name','last_name']
+        
+        widgets = {
+            'username':forms.TextInput(attrs={'class':f' col-start-2 row-start-2 {base}','placeholder':"Имя пользователя"}),
+            'first_name':forms.TextInput(attrs={'class':f'col-start-2 row-start-4 {base}','placeholder':"Имя"}),
+            'last_name':forms.TextInput(attrs={'class':f' col-start-2 row-start-6 {base}','placeholder':"Фамилия"}),
+            'photo':forms.FileInput(attrs={'class':f' hidden','placeholder':"Фото"}),
+            
+        }
