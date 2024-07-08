@@ -143,7 +143,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = 'home'
-
+LOGIN_URL = 'register:login'
 TAILWIND_APP_NAME = 'theme'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"

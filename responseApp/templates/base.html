@@ -34,14 +34,26 @@
         <div class='row-start-2 col-start-4 grid  justify-center justify-items-center max-h-16 h-[45px]'>
             <span class='row-start-2 col-start-2 text-dark_panel font-bold'><p>{% block tovarName %}<a href='{% url "home" %}'>Отзовик</a>{% endblock tovarName %}</p></span>
         </div>
-        <div class='col-start-2 row-start-2 h-12 w-12'><img class=' w-12 h-12' src="{% static 'svg/menu.svg' %}" alt="menu"></div>
+        <div class='col-start-2 row-start-2 h-12 w-12 '>
+            <img class='menuBtn w-12 h-12' src="{% static 'svg/menu.svg' %}" alt="menu">
+            <div class=' menu transition-all hidden bg-panel w-[200px]  flex justify-center rounded-xl translate-x-[-30px] h-60 translate-y-5 border-b-4 border-dark_panel border-solid shadow-inner shadow-[#65558F]/50'>
+                
+                <ul class='flex flex-col'>
+                    {% for item in mainmenu %}
+                   
+                    <li class=' mt-10 text-dark_panel   font-bold h-[30px] hover:scale-[1.2] transition-all cursor-pointer hover:rounded-md hover:bg-dark_panel/15 grid grid-cols-[24px,1fr] grid-rows-1'> <img src="{% static item.ico %}" class='col-start-1' alt="">{{item.title}}</li>
+                {% endfor %}
+                </ul>
+                    
+            </div>
+        </div>
             <div class="w-96 col-start-5 row-start-1 grid grid-cols-3 grid-rows-[8px,1fr,8px] max-h-[64px]">
                 <button type="button" class='bg-button active:bg-panel col-start-1 row-start-2 transition-colors h-12 p-2 w-[200px] max-sm:col-start-4   rounded-[100px]  shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]  gap-2 text-[#65558f] font-bold'>
                     <a href="{% url 'tovar_create' %}">+ Добавить товар</a>
                 </button>
-                <div class='flex items-center justify-center col-start-3 row-start-2  h-12 bg-button rounded-3xl w-[130px] active:bg-panel text-dark_panel font-bold p-2 cursor-pointer shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]'>
+                <div class='flex items-center justify-center col-start-3 row-start-2 translate-x-[-15px]  h-12 bg-button rounded-3xl w-max active:bg-panel text-dark_panel font-bold p-2 cursor-pointer shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]'>
                     {% if user.is_authenticated %}
-                        <p class='mr-2 logout'>Выйти |</p><a href="">{{user.username}}</a>
+                        <p class='mr-2 logout'>Выйти |</p><a href="{% url 'register:view_profile' %}">{{user.username}}</a>
                     {% else %}
                         <a href="{% url 'register:login' %}">Войти</a>
                     {% endif %}
@@ -50,9 +62,15 @@
             </div>
         </div>
     </header>
-
-    
-
+    <div  class='modalWindow  hidden grid-cols-[700px,1fr,700px] grid-rows-3  p-3  bg-black/60 fixed top-0 z-10 w-full h-full'>
+        <form class = 'grid grid-cols-[25px,1fr,1fr,1fr,1fr,25px] row-start-2 rounded-md col-start-2 bg-panel w-[255px] h-[310px] grid-rows-[30px,50px,100px,1fr,3rem] m-0 p-3'action="{% url 'register:logout' %}" method="post">
+            <img class='col-start-3 row-start-3 col-span-3'width='100'src="{% static 'svg/logout.svg' %}" alt="logout ico">
+            <p class='mt-1 text-center col-start-1 row-start-1 col-span-6 text-dark_panel font-bold'>Вы уверены что хотите выйти?</p>
+            {% csrf_token %}
+            <button class='no bg-button hover:bg-[#fad7d7] active:bg-panel col-start-1 col-span-3 row-start-4 transition-colors h-12 p-2 w-[100px] max-sm:col-start-4   rounded-[100px]  shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]  gap-2 text-[#65558f] font-bold' type="button">Нет</button>
+            <button class='bg-button hover:bg-[#d9fad7] active:bg-panel col-start-5 col-span-3 row-start-4 transition-colors h-12 p-2 w-[100px]    rounded-[100px]  shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]  gap-2 text-[#65558f] font-bold'type="submit">Да</button>
+        </form>
+    </div>
 
         
         {% block content %}

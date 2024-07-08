@@ -4,15 +4,7 @@
 
 
 {% block content %}
-<div  class='modalWindow  hidden grid-cols-[700px,1fr,700px] grid-rows-3  p-3  bg-black/60 fixed top-0 z-10 w-full h-full'>
-    <form class = 'grid grid-cols-[25px,1fr,1fr,1fr,1fr,25px] row-start-2 rounded-md col-start-2 bg-panel w-[255px] h-[310px] grid-rows-[30px,50px,100px,1fr,3rem] m-0 p-3'action="{% url 'register:logout' %}" method="post">
-        <img class='col-start-3 row-start-3 col-span-3'width='100'src="{% static 'svg/logout.svg' %}" alt="logout ico">
-        <p class='mt-1 text-center col-start-1 row-start-1 col-span-6 text-dark_panel font-bold'>Вы уверены что хотите выйти?</p>
-        {% csrf_token %}
-        <button class='no bg-button hover:bg-[#fad7d7] active:bg-panel col-start-1 col-span-3 row-start-4 transition-colors h-12 p-2 w-[100px] max-sm:col-start-4   rounded-[100px]  shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]  gap-2 text-[#65558f] font-bold' type="button">Нет</button>
-        <button class='bg-button hover:bg-[#d9fad7] active:bg-panel col-start-5 col-span-3 row-start-4 transition-colors h-12 p-2 w-[100px]    rounded-[100px]  shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]  gap-2 text-[#65558f] font-bold'type="submit">Да</button>
-    </form>
-</div>
+
 
         <div class="">
             <div class='ml-12  mt-24'>

@@ -1,9 +1,11 @@
 from django.shortcuts import render 
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
-from django.views.generic import CreateView
+from django.views.generic import CreateView,DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from .forms import UserLoginForm, CreateUserForm
+
 
 # Create your views here.
 
@@ -15,12 +17,24 @@ class UserLogin(LoginView):
     # def get_success_url(self) -> str:
     #     return reverse_lazy('home')
     
+    
 
     
 class CreateUser(CreateView):
     form_class = CreateUserForm
     template_name = 'register/register.html'
+    
+    def get_success_url(self) -> str:
+        
+        print(self.request.GET)
 
     
 
 
+class Profile(LoginRequiredMixin,DetailView):
+    template_name = 'register/profile.html'
+    
+    def get_object(self, queryset=None):
+        model = get_user_model()
+        return model.objects.get(username=self.request.user.username)
+        

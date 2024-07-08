@@ -1,9 +1,11 @@
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
 from django.views.generic import ListView,DetailView, FormView, CreateView
-
 from .models import Tovar
 from .forms import ResponseForm, CreateTovarForm 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -43,3 +45,4 @@ class CreateTovarCreateView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['permission_denied_message'] = self.permission_denied_message
         return context
+    

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block tovarOther %}
+    {{ block.super }} &gt Профиль
+{% endblock tovarOther %}
+
+
+{% block content %}
+    <main class='w-full h-screen flex justify-center items-center'>
+        <div class='shadow-inner shadow-[#65558F]/70 p-3 w-[600px] bg-panel h-max rounded-xl'>
+            <div class='grid grid-cols-[130px,20px,1fr] grid-rows-[20px,30px,10px,30px,10px,30px,10px,30px,1fr]'>
+                {% if object.photo %}
+                <img src="{{object.photo.url}}" class='rounded-xl col-span-2 col-start-1 row-start-1'  alt="Фото пользователя">
+                {% else %}
+                <img src="{% static 'img/noimage.jpg' %}"  class=' rounded-md col-span-2 col-start-1 row-start-1' alt="Фото пользователя">
+            {% endif %}
+            {% if object.is_active %}
+                <div class=' col-start-2 row-start-1 w-5 h-5 bg-green-500 rounded-full'></div>
+                {% else %}
+                <div class=' col-start-2 row-start-1 w-5 h-5 bg-red-500 rounded-full'></div>
+            {% endif %}
+                
+                <p class='col-start-3 row-start-2 font-bold text-dark_panel ml-4'>
+                    Никнейм: {{ object.username }}
+                </p>
+                <p class='col-start-3 row-start-4 font-bold text-dark_panel ml-4 '>
+                    Имя: {% if  object.first_name %}
+                    {{ object.first_name }}
+                    {% else %}
+                    Не указано
+                    {% endif %}
+                </p>
+                <p class='col-start-3 row-start-6 font-bold text-dark_panel ml-4'>
+                    Фамилия: {% if object.last_name %}
+                    {{object.last_name}}
+                    {% else %}
+                    Не указано
+                    {% endif %}
+                </p>
+            </div>
+
+
+        </div>
+    </main>
+{% endblock content %}
+    

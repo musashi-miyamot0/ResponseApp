@@ -37,7 +37,7 @@ class CreateUserForm(UserCreationForm):
         
     class Meta:
         model = get_user_model()
-        fields = ['username','email','password1','password2']
+        fields = ['username','email','photo','password1','password2']
 
         widgets = {'email':forms.EmailInput(attrs={
             'class':'  transition-colors focus:border-dark_panel border-0 focus:border-b-4 focus:outline-none focus:ring-0 bg-panel border-b-4 border-dark_panel/50  px-2 py-1 w-full row-start-3','placeholder':"Почта"
