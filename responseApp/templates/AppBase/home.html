@@ -23,7 +23,11 @@
                     <div class='rounded-md  p-2 mt-5 h-[208px] bg-[white] border-solid border border-[#D9D9D9]  ml-12'>
                         <div class='h-[208px] grid grid-cols-[120px,400px] grid-rows-[1fr,1fr,1fr]'>
                             {% if t.user %}
+                                {% if request.user == t.user %}
+                                <p class='text-[#3e3e3e] col-span-1'><b>Создал: Вы</b></p>
+                                {% else %}
                                 <p class='text-[#3e3e3e] col-span-1'><b>Создал: {{t.user}}</b></p>
+                                {% endif %}
                                 {% else %}
                                 <p class='text-[#3e3e3e] inline ' >Создал: Аноним</p>
                             {% endif %}
@@ -42,7 +46,6 @@
             {% endfor %}
         </div>  
 
-        
 {% endblock content %}
     
 
