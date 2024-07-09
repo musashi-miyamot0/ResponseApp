@@ -12,21 +12,26 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 class HomePage(ListView):
-    model = Tovar
     template_name = 'AppBase/home.html'
     paginate_by = 10
     context_object_name = 'tovar'
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["tovar"] = Tovar.objects.select_related('user').prefetch_related('tag').all() 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["tovar"] = self.model.objects.select_related('user').prefetch_related('tag').all() 
+        
+    #     return context
+    
+    def get_context_data(self, **kwargs: reverse_lazy):
+        context = super().get_context_data(**kwargs) 
+        context['tags'] = Tags.objects.all()
         return context
-    
+    def get_queryset(self):
+        return Tovar.objects.select_related('user').prefetch_related('tag').all() 
 
     
 
-def allresponse(request):
-    return render(request, 'AppBase/home.html')
+
 
 class TovarDetail(DetailView, FormView):
     model = Tovar
@@ -47,8 +52,12 @@ class CreateTovarCreateView(LoginRequiredMixin, CreateView):
     
 
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['permission_denied_message'] = self.permission_denied_message
-        return context
+
     
+class GetTags(ListView):
+     template_name = 'AppBase/home.html'
+     context_object_name = 'tovar'
+     
+     def get_queryset(self):
+         return Tovar.objects.filter(tag = self.kwargs['pk'])
+     

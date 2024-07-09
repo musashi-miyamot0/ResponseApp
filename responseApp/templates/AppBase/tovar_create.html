@@ -13,16 +13,24 @@
     <main class=" w-full h-screen ">
         <form enctype='multipart/form-data'  action="{% url 'tovar_create' %}" class='grid  grid-rows-[100px,190px,20px,48px,666px,1fr] grid-cols-[50px,360px,30px,1421px,1fr]' method='POST'>
             {% csrf_token %}
-            <div class='w-[360px] h-[190px] rounded-2xl bg-panel row-start-2 col-start-2 shadow-inner shadow-[#65558F]/20 grid grid-cols-[61px,204px,70px] gap-3 grid-rows-[20px,40px,48px,1fr]'>
+            <div class='w-[360px] h-[400px] rounded-2xl bg-panel row-start-2 col-start-2 shadow-inner shadow-[#65558F]/20 grid grid-cols-[61px,204px,70px] gap-3 grid-rows-[20px,40px,100px,104px,48px,1fr]'>
                 <div class='col-start-2 row-start-2'>
                     {{ form.title }}
                 </div>
-    
-                <div class='col-start-1 row-start-4 ml-7 '>
-                    {{ form.image }}
+
+                <div class='col-start-2 row-start-3 w-[205px] h-[100px] bg-dark_panel/20 border-dark_panel border-dashed border-2 rounded-md   '>
+                    
+                    <label for="{{form.image.id_for_label }}" class=' h-full flex justify-center items-center  '>
+                        <img src="{% static 'svg/add_photo.svg' %}" alt="">
+                        <p class=' cursor-pointer  text-dark_panel font-bold'>Выбрать фото</p>
+                        {{form.image}}
+                </label>
                 </div>
-                <div class='col-start-1 row-start-4 ml-7 '>
+                <div class='col-start-2 w-[204px] row-start-4'>
                     {{ form.tag }}
+                </div>
+                <div class='center h-max col-start-2 row-start-5 flex justify-center'>
+                    <button type='submit' class='flex items-center justify-center  h-12 bg-button rounded-3xl w-[130px] active:bg-panel text-dark_panel font-bold p-2 cursor-pointer shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]'>+ Создать</button>
                 </div>
             </div>
     
@@ -32,9 +40,7 @@
                 </div>
             </div>
 
-            <div class='center col-start-2 row-start-4 flex justify-center'>
-                <button type='submit' class='flex items-center justify-center  h-12 bg-button rounded-3xl w-[130px] active:bg-panel text-dark_panel font-bold p-2 cursor-pointer shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]'>+ Создать</button>
-            </div>
+            
         </form>
             
     </main>

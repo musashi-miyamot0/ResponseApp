@@ -5,10 +5,31 @@
 
 {% block content %}
 
-<div class='absolute left-[50px] rounded-2xl h-[1000px] w-[340px] bg-panel'>
+<div class='absolute left-[50px] rounded-2xl h-[1000px] w-[340px] bg-panel flex text-center justify-center '>
 
     
+    
 
+       
+        
+        <ul class=''>
+        {% for t in tags %}
+            <li class='hover:scale-[1.2] transition-all mt-3 h-max w-full text-[#3e3e3e]'>
+                <a href="{{t.get_absolute_url}}" class='bg-dark_panel/20 rounded-md h-max grid w-full grid-cols-2 grid-rows-1  '>
+                    {{t.title}} 
+                    <p class=''>{{t.tags.all|length }}
+                    </p>
+                </a>
+            </li>
+        {% endfor %}
+            
+        </ul>
+
+            
+
+        
+
+        
 
 </div>
         <div class=" z-0 translate-x-[400px] w-[1000px]">

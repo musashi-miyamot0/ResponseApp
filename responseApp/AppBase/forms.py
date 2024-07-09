@@ -30,16 +30,17 @@ class CreateTovarForm(forms.ModelForm):
             'title': forms.TextInput(attrs={
                'class': base_class,"placeholder":'Название'
             }),"image":forms.FileInput(attrs={
-                'class': f"{base_class}" ,
+                'class': f"{base_class} hidden" ,
             }),
             'description': forms.Textarea(attrs={
                 "class":"flex-1 rounded-2xl transition-colors focus:!border-opac border-0 focus:border-b-0 focus:outline-none focus:ring-0 bg-panel border-b-0 border-dark_panel/50",'rows':32, 'cols':171,'placeholder':"Текст статьи"
-            })
+            }),
+            'tag': forms.SelectMultiple(attrs={"class":'w-[204px] bg-panel border-0 shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]'})
             
         }
 
-    def clean_tags(self):
-        tags = self.cleaned_data.get('tags', [])
+    def clean_tag(self):
+        tags = self.cleaned_data.get('tag')
         if len(tags)>4:
             raise forms.ValidationError('Максимальное количество тегов 4',code='invalid')
         return tags

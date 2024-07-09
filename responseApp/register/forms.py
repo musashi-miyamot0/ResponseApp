@@ -61,6 +61,6 @@ class EditUserForm(forms.ModelForm):
             'username':forms.TextInput(attrs={'class':f' col-start-2 row-start-2 {base}','placeholder':"Имя пользователя"}),
             'first_name':forms.TextInput(attrs={'class':f'col-start-2 row-start-4 {base}','placeholder':"Имя"}),
             'last_name':forms.TextInput(attrs={'class':f' col-start-2 row-start-6 {base}','placeholder':"Фамилия"}),
-            'photo':forms.FileInput(attrs={'class':f' hidden','placeholder':"Фото"}),
+            'photo':forms.FileInput(attrs={'class':' hidden','placeholder':"Фото"}),
             
         }
