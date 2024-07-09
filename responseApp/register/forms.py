@@ -4,24 +4,26 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 class UserLoginForm(AuthenticationForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.style = {
-            'base': " bg-panel border-b-4 border-dark_panel",
 
-        }
-        
-        self.fields['username'].widget.attrs.update({'class': f' row-start-2 col-start-1 {self.style.get("base")}',
-                                                     'placeholder':'Имя',
-                                                     'autocomplete':'off'})
-        
-        self.fields['password'].widget.attrs.update({'class': f' row-start-4 {self.style.get("base")} ',
-                                                     'placeholder':'Пароль',
-                                                     'autocomplete':'off'})
+    class Meta:
 
-    class Meta:     
+        base:str = " bg-panel border-b-4 border-dark_panel",
+
+
         model = get_user_model()
         fields = ('username', 'password')
+        widgets = {
+            'username': forms.TextInput(attrs={
+                'class': f" row-start-2 col-start-1 {base}",
+                'placeholder':'Имя',
+                'autocomplete':'off'}),
+            'password': forms.PasswordInput(attrs={
+                'class': f" row-start-4  {base}",
+                'placeholder':'Пароль',
+                'autocomplete':'off'}),
+            
+        }
+    
 
         
 

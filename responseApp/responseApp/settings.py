@@ -151,3 +151,4 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 
 AUTH_USER_MODEL ="register.User"
+

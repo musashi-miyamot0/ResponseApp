@@ -17,7 +17,13 @@
         <div class='grid grid-cols-[150px,200px,1fr] grid-rows-[20px,30px,10px,30px,10px,30px,10px,30px,1fr]'>
             
 
-            <img src="{{user.photo.url}}"  class='rounded-xl col-span-2 col-start-1 row-start-1'alt="Avatar"> 
+            
+            {% if user.photo %}
+            <img src="{{user.photo.url}}" width='150' class='rounded-xl col-span-2 col-start-1 row-start-1'alt="Avatar"> 
+            {% else %}
+            <img src="{% static 'img/noimage.jpg' %}" width='150'  class='rounded-xl col-span-2 col-start-1 row-start-1'alt="Avatar"> 
+            {% endif %}
+                
             <label for="{{form.photo.id_for_label }}" class='mt-2 col-start-1 row-start-8 flex justify-center content-center'>
                 <p class=' cursor-pointer hover:rounded-md  transition-all hover:bg-dark_panel/30 text-dark_panel font-bold'>Изменить фото</p>
             {{form.photo}}

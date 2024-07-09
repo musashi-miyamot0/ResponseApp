@@ -28,7 +28,7 @@
       <link rel="stylesheet" href="{% static 'base.css' %}">
 </head>
 <body class='scroll-smooth'>
-    <header class='fixed top-2 w-full ' >
+    <header class='fixed top-2 z-10 w-full ' >
       <div class='max-h-[64px] grid grid-rows-[8px,1fr,1fr] grid-cols-[30px,50px,400px,1fr,400px] w-[95%] mr-20 h-[64px] ml-12  bg-panel rounded-2xl shadow-inner shadow-[#65558F]/20 '>
 
         <div class='row-start-2 col-start-4 grid  justify-center justify-items-center max-h-16 h-[45px]'>
@@ -41,12 +41,18 @@
                 <ul class='flex flex-col'>
                     {% for item in mainmenu %}
                    
+
+
                     <li class=' mt-10 text-dark_panel   font-bold h-[30px] hover:scale-[1.2] transition-all cursor-pointer hover:rounded-md hover:bg-dark_panel/15 grid grid-cols-[24px,1fr] grid-rows-1'> <img src="{% static item.ico %}" class='col-start-1' alt=""><a href="
-                    {% if item.urlLink %}
-                        {% url item.urlLink %}
-                    {% endif %}
-                        ">{{item.title}}</a></li>
-                {% endfor %}
+                        {% if item.urlLink %}
+                            {% url item.urlLink %}
+                        {% endif %}
+                            ">{{item.title}}</a></li>
+
+                    {% endfor %}
+                        
+                    
+                        
                 </ul>
                     
             </div>
@@ -55,13 +61,14 @@
                 <button type="button" class='bg-button active:bg-panel col-start-1 row-start-2 transition-colors h-12 p-2 w-[200px] max-sm:col-start-4   rounded-[100px]  shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]  gap-2 text-[#65558f] font-bold'>
                     <a href="{% url 'tovar_create' %}">+ Добавить товар</a>
                 </button>
+                {% with request.user as user %}
                 <div class='flex items-center justify-center col-start-3 row-start-2 translate-x-[-15px]  h-12 bg-button rounded-3xl w-max active:bg-panel text-dark_panel font-bold p-2 cursor-pointer shadow-[0_-0px_10px_-3px_rgba(0,0,0,0.5)]'>
                     {% if user.is_authenticated %}
                         <p class='mr-2 logout'>Выйти |</p><a href="{% url 'register:view_profile' %}">{{user.username}}</a>
                     {% else %}
                         <a href="{% url 'register:login' %}">Войти</a>
                     {% endif %}
-
+                {% endwith %}
                 </div> 
             </div>
         </div>

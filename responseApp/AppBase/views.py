@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from django.views.generic import ListView,DetailView, FormView, CreateView
-from .models import Tovar
+from .models import Tovar,Tags
 from .forms import ResponseForm, CreateTovarForm 
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
@@ -17,6 +17,12 @@ class HomePage(ListView):
     paginate_by = 10
     context_object_name = 'tovar'
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tovar"] = Tovar.objects.select_related('user').prefetch_related('tag').all() 
+        return context
+    
+
     
 
 def allresponse(request):

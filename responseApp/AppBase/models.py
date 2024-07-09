@@ -21,7 +21,7 @@ class Tovar(BaseField):
     3 - description
     """
 
-
+    tag = models.ManyToManyField("Tags",related_name='tags',null=True,blank=True)
     user = models.ForeignKey(get_user_model(), models.SET_NULL,verbose_name='Пользователь' ,null=True)
     image = models.ImageField(upload_to='tovarIMG', blank=False, null=True)
     description = models.TextField(blank=True, null=True,verbose_name='Описание')
@@ -60,3 +60,10 @@ class Response(BaseField):
         verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
         
+class Tags(BaseField):
+    class Meta:
+        verbose_name = "Тег"
+        verbose_name_plural = "Теги"
+        
+    def __str__(self) -> str:
+        return self.title

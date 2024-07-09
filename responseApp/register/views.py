@@ -44,10 +44,7 @@ class Profile(LoginRequiredMixin,DetailView):
 class EditProfile(UpdateView):
     template_name = 'register/editable_profile.html'
     form_class = EditUserForm
-    
-    def get_success_url(self) -> str:
-
-        return redirect('register:view_profile')
+    success_url = reverse_lazy('register:view_profile')
     
 
     def get_object(self, queryset = None):

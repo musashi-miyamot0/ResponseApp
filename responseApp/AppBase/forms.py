@@ -24,7 +24,7 @@ class CreateTovarForm(forms.ModelForm):
     class Meta:
         base_class = '"h-[40px] transition-colors focus:border-dark_panel border-0 focus:border-b-4 focus:outline-none focus:ring-0 bg-panel border-b-4 border-dark_panel/50'
         model = Tovar
-        fields = ("title","image",'description')
+        fields = ("title","image",'description','tag',)
         
         widgets = {
             'title': forms.TextInput(attrs={
@@ -33,8 +33,13 @@ class CreateTovarForm(forms.ModelForm):
                 'class': f"{base_class}" ,
             }),
             'description': forms.Textarea(attrs={
-                "class":"flex-1 rounded-2xl transition-colors focus:!border-opac border-0 focus:border-b-0 focus:outline-none focus:ring-0 bg-panel border-b-0 border-dark_panel/50",'rows':32, 'cols':171
+                "class":"flex-1 rounded-2xl transition-colors focus:!border-opac border-0 focus:border-b-0 focus:outline-none focus:ring-0 bg-panel border-b-0 border-dark_panel/50",'rows':32, 'cols':171,'placeholder':"Текст статьи"
             })
             
         }
 
+    def clean_tags(self):
+        tags = self.cleaned_data.get('tags', [])
+        if len(tags)>4:
+            raise forms.ValidationError('Максимальное количество тегов 4',code='invalid')
+        return tags
